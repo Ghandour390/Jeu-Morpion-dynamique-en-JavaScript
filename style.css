@@ -30,7 +30,8 @@ label, input, button {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 2.5rem;
+  font-size: 100%;
+  font-family: sans-serif;
   user-select: none;
   cursor: pointer;
   background: #f1f5f9;
@@ -47,7 +48,7 @@ button {
   border: none;
   border-radius: 8px;
   padding: 8px 18px;
-  margin: 0 5px;
+  margin: 10PX 5px;
   font-weight: 600;
   cursor: pointer;
   box-shadow: 0 2px 8px rgba(99,102,241,0.08);

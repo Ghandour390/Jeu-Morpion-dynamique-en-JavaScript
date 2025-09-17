@@ -20,28 +20,50 @@ function getGridSize() {
 
 function checkWinDynamic() {
     const size = getGridSize();
-    let lines = [], columns = [], diag1 = [], diag2 = [];
+    const k = parseInt(document.getElementById('winSieze').value);
+
+    // récupérer la grille comme matrice 2D
+    let board = [];
     for (let i = 0; i < size; i++) {
-        lines.push([]);
-        columns.push([]);
+        let row = [];
+        for (let j = 0; j < size; j++) {
+            row.push(cells[i * size + j].textContent);
+        }
+        board.push(row);
     }
-    for (let i = 0; i < cells.length; i++) {
-        let row = Math.floor(i / size);
-        let col = i % size;
-        lines[row].push(i);
-        columns[col].push(i);
-        if (row === col) diag1.push(i);
-        if (row + col === size - 1) diag2.push(i);
-    }
-    const winPatterns = [...lines, ...columns, diag1, diag2];
-    for (let pattern of winPatterns) {
-        const first = cells[pattern[0]].textContent;
-        if (first !== '' && pattern.every(idx => cells[idx].textContent === first)) {
-            return first;
+
+    let directions = [
+        [0, 1],  
+        [1, 0],   
+        [1, 1],   
+        [1, -1]  
+    ];
+
+    for (let i = 0; i < size; i++) {
+        for (let j = 0; j < size; j++) {
+            let player = board[i][j];
+            if (player === '') continue;
+
+            for (let [dx, dy] of directions) {
+                let count = 1;
+                for (let step = 1; step < k; step++) {
+                    let x = i + dx * step;
+                    let y = j + dy * step;
+
+                    if (x < 0 || x >= size || y < 0 || y >= size) break;
+                    if (board[x][y] === player) {
+                        count++;
+                    } else break;
+                }
+                if (count === k) {
+                    return player; 
+                }
+            }
         }
     }
     return null;
 }
+
 
 function showModal(message) {
     document.getElementById('modal-message').textContent = message;
