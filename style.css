@@ -41,7 +41,11 @@ label, input, button {
 .cell:hover {
   background-color: #e0e7ff;
 }
-
+#player{
+  background-color: #f3f3f4;
+  border:solid;
+  margin-left: 0px;
+}
 button {
   background: #6366f1;
   color: #fff;
